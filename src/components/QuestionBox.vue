@@ -8,13 +8,13 @@
 
     <hr class="my-4">
         <b-list-group>
-            <b-list-group-item v-for="(answer, index) in answers"
+            <b>
+         <b-list-group-item v-for="(answer, index) in answers"
             @click="selectAnswer(index)" :key="index"
-            :class="[
-                !answered && selectedIndex === index ? 'selected' :
-                answered && correctIndex === index ? 'correct' : '']">
+            :class="answerType(index)">
                   {{ answer }}
-            </b-list-group-item>
+        </b-list-group-item>
+            </b>
         </b-list-group>
 
     <b-button variant="primary" class="btn"
@@ -84,6 +84,19 @@ export default {
             // lodash imported as an underscore
             this.shuffledAnswers = _.shuffle(answers)
             this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
+        },
+        answerType(index) {
+            let answerType = ''
+
+            if (!this.answered && this.selectedIndex === index) {
+                answerType = 'selected'
+            }else if (this.answered && this.correctIndex === index) {
+                answerType = 'correct'
+            }else if (this.answered && this.selectedIndex === index && this.correctIndex !== index){
+                answerType = 'incorrect'
+            }
+
+            return answerType
         }
     },
     // mounted() {
@@ -108,13 +121,16 @@ export default {
 
     .selected {
         background-color: lightblue;
+        color: white;
     }
 
     .correct {
         background-color: lightgreen;
+        color: white;
     }
 
     .incorrect {
         background-color: red;
+        color: white;
     }
 </style>

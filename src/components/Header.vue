@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class='mar'>
     <b-nav tabs>
         <b-nav-item disabled><b>Quiz app</b></b-nav-item>
         <b-nav-item disabled><b>Counter: {{ numCorrect }}/{{ numTotal }}</b></b-nav-item>
@@ -15,3 +15,9 @@ export default {
     ]
 }
 </script>
+
+<style lang="css">
+    .mar {
+        margin-bottom: 20px;
+    }
+</style>
